@@ -40,7 +40,8 @@ before_build:
 
 build_script:
   - ps: |
-      bash nightlybuild.sh
+      cmake .
+      cmake --build .
 
 on_failure:
   - ps: |

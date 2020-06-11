@@ -73,7 +73,7 @@ option(USE_VTK "Use VTK." YES)
 # the following option is used for nightly builds of the installer.
 # it builds the current Maxima/wxMaxima Git versions and also
 # sets the installation directory to ${WINDOWS_DRIVELETTER}:\maxima-current
-option(BUILD_CURRENT "Build a installer for current Maxima/wxMaxima." NO)
+option(BUILD_CURRENT "Build a installer for current Maxima/wxMaxima." YES)
 
 option(WITH_ABCL "Include ABCL in the installer." NO)
 
