@@ -44,10 +44,8 @@ build_script:
 
 on_failure:
   - ps: |
-      pushd build
       7z a FailureDump.zip *
       Push-AppveyorArtifact FailureDump.zip
-      popd
 
 artifacts:
   - path: '*.exe'

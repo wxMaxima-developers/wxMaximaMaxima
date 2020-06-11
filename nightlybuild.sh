@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Compilation-script for nightly builds.
 # Should be copied to a private location (~/bin), so that
 # git changes to that script can be reviewed before.
