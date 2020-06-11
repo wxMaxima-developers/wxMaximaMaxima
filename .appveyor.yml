@@ -35,7 +35,7 @@ install:
       echo '- Installing pandoc...'
       choco install -y --no-progress pandoc
       choco install -y --no-progress 7zip.install
-
+      choco install -y --no-progress nsis
 before_build:
 
 build_script:
