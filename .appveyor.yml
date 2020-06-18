@@ -20,13 +20,12 @@ branches:
   - DebianPackaging_NightlyBuild
 
 install:
+  - set PATH=C:\MinGW\bin;%PATH%
   - ps: |
-      set PATH=C:\MinGW\bin;%PATH%
       echo '- Installing pandoc...'
       choco install -y --no-progress pandoc
       choco install -y --no-progress 7zip.install
       choco install -y --no-progress nsis
-before_build:
 
 build_script:
   - ps: |
