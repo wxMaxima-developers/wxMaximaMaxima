@@ -128,8 +128,6 @@ endif()
 set(CLISP_URL "http://downloads.sourceforge.net/project/clisp/clisp/${CLISPVERSION}/clisp-${CLISPVERSION}-win32-mingw-big.zip")
 
 
-add_subdirectory("wine/")
-
 find_program(SEVENZIP_EXE NAMES 7z)
 
 if(SEVENZIP_EXE)
