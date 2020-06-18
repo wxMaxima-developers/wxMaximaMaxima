@@ -128,19 +128,6 @@ endif()
 set(CLISP_URL "http://downloads.sourceforge.net/project/clisp/clisp/${CLISPVERSION}/clisp-${CLISPVERSION}-win32-mingw-big.zip")
 
 
-# Where are libgcc and libstdc++?
-if(BUILD_64BIT)
-    execute_process(COMMAND "${CMAKE_CXX_COMPILER}" -print-file-name=libgcc_s_seh-1.dll OUTPUT_VARIABLE MINGW_LIBGCC    OUTPUT_STRIP_TRAILING_WHITESPACE)
-else()
-    execute_process(COMMAND "${CMAKE_CXX_COMPILER}" -print-file-name=libgcc_s_sjlj-1.dll OUTPUT_VARIABLE MINGW_LIBGCC    OUTPUT_STRIP_TRAILING_WHITESPACE)
-endif()
-
-execute_process(COMMAND "${CMAKE_CXX_COMPILER}" -print-file-name=libstdc++-6.dll     OUTPUT_VARIABLE MINGW_LIBSTDCPP OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-message(STATUS "Found libstdc++ at ${MINGW_LIBSTDCPP}")
-
-message(STATUS "Found libgcc at ${MINGW_LIBGCC}")
-
 add_subdirectory("wine/")
 
 find_program(SEVENZIP_EXE NAMES 7z)
@@ -237,11 +224,6 @@ install(FILES "${CMAKE_BINARY_DIR}/maxima-prefix/src/maxima/doc/info/maxima.pdf"
 configure_file("${CMAKE_SOURCE_DIR}/lispselector.tcl" "${CMAKE_BINARY_DIR}/lispselector.tcl")
 install(FILES "${CMAKE_BINARY_DIR}/lispselector.tcl" DESTINATION bin/ COMPONENT Maxima)
 install(FILES "${CMAKE_SOURCE_DIR}/lispselector.bat" DESTINATION bin/ COMPONENT Maxima)
-
-
-
-# Include DLLs from the current Mingw environment.
-install(FILES "${MINGW_LIBSTDCPP}" "${MINGW_LIBGCC}" DESTINATION bin/ COMPONENT Maxima)
 
 configure_file("${CMAKE_SOURCE_DIR}/licenses.html" "${CMAKE_BINARY_DIR}/licenses.html")
 install(FILES "${CMAKE_BINARY_DIR}/licenses.html" DESTINATION share/doc/ COMPONENT Maxima)
