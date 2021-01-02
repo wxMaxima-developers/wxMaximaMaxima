@@ -25,9 +25,9 @@ jobs:
           echo 4: ${ env.WXVERSION }
           echo 5: $WXVERSION
           echo 6: %WXVERSION%
-          Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.tar.bz2 -OutFile wxWidgets-${{env.WXVERSION}}.tar.bz2
+          Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.zip -OutFile wxWidgets-${{env.WXVERSION}}.zip
     - name: extract_wxWidget
-      run: 7zip e wxWidgets-${{env.WXVERSION}}.tar.bz2
+      run: Expand-Archive -LiteralPath wxWidgets-${{env.WXVERSION}}.zip -DestinationPath .
     - name: configure_wxWidgets
       run: |
           cd wxWidgets-${{env.WXVERSION}}
