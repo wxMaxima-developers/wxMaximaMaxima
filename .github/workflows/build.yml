@@ -19,18 +19,18 @@ jobs:
         fetch-depth: 15
     - name: Download_wxWidgets
       run: |
-          echo 1: ${WXWIDGETSVERSION}
-          echo 2: ${{env.WXWIDGETSVERSION}}
-          echo 3: ${env.WXWIDGETSVERSION}
-          echo 4: ${ env.WXWIDGETSVERSION }
-          echo 5: $WXWIDGETSVERSION
-          echo 6: %WXWIDGETSVERSION%
-          Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${WXWIDGETSVERSION}/wxWidgets-${WXWIDGETSVERSION}.tar.bz2 -OutFile wxWidgets-${WXWIDGETSVERSION}.tar.bz2
+          echo 1: ${WXVERSION}
+          echo 2: ${{env.WXVERSION}}
+          echo 3: ${env.WXVERSION}
+          echo 4: ${ env.WXVERSION }
+          echo 5: $WXVERSION
+          echo 6: %WXVERSION%
+          Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.tar.bz2 -OutFile wxWidgets-${{env.WXVERSION}}.tar.bz2
     - name: extract_wxWidget
-      run: zip e wxWidgets-${WXWIDGETSVERSION}.tar.bz2
+      run: zip e wxWidgets-${{env.WXVERSION}}.tar.bz2
     - name: configure_wxWidgets
       run: |
-          cd wxWidgets-${WXWIDGETSVERSION}
+          cd wxWidgets-${{env.WXVERSION}}
           cd build
           cd msw
           mingw32-make -f makefile.gcc
