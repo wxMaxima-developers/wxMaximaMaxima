@@ -19,6 +19,9 @@ jobs:
         fetch-depth: 15
     - name: Download_wxWidgets
       run: |
+      	  echo 1: ${WXWIDGETSVERSION}
+	  echo 2: $WXWIDGETSVERSION
+	  echo 3: %WXWIDGETSVERSION%
           Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${WXWIDGETSVERSION}/wxWidgets-${WXWIDGETSVERSION}.tar.bz2 -OutFile wxWidgets-${WXWIDGETSVERSION}.tar.bz2
     - name: extract_wxWidget
       run: zip e wxWidgets-${WXWIDGETSVERSION}.tar.bz2
