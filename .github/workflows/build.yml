@@ -18,12 +18,12 @@ jobs:
         # a pull request then we can checkout the head.
         fetch-depth: 15
     - name: Download_wxWidgets
-        run: |
-	     wget https://github.com/wxWidgets/wxWidgets/releases/download/v${WXWIDGETSVERSION}/wxWidgets-${WXWIDGETSVERSION}.tar.bz2
+      run: |
+	  wget https://github.com/wxWidgets/wxWidgets/releases/download/v${WXWIDGETSVERSION}/wxWidgets-${WXWIDGETSVERSION}.tar.bz2
     - name: extract_wxWidget
-        run: zip e wxWidgets-${WXWIDGETSVERSION}.tar.bz2
+      run: zip e wxWidgets-${WXWIDGETSVERSION}.tar.bz2
     - name: configure_wxWidgets
-        run: |
+      run: |
           cd wxWidgets-${WXWIDGETSVERSION}
 	  cd build
 	  cd msw
