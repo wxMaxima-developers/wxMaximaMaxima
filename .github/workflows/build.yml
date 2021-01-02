@@ -20,8 +20,11 @@ jobs:
     - name: Download_wxWidgets
       run: |
           echo 1: ${WXWIDGETSVERSION}
-          echo 2: $WXWIDGETSVERSION
-          echo 3: %WXWIDGETSVERSION%
+          echo 2: ${{env.WXWIDGETSVERSION}}
+          echo 3: ${env.WXWIDGETSVERSION}
+          echo 4: ${ env.WXWIDGETSVERSION }
+          echo 5: $WXWIDGETSVERSION
+          echo 6: %WXWIDGETSVERSION%
           Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${WXWIDGETSVERSION}/wxWidgets-${WXWIDGETSVERSION}.tar.bz2 -OutFile wxWidgets-${WXWIDGETSVERSION}.tar.bz2
     - name: extract_wxWidget
       run: zip e wxWidgets-${WXWIDGETSVERSION}.tar.bz2
