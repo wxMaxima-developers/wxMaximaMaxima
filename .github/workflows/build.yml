@@ -27,7 +27,7 @@ jobs:
           echo 6: %WXVERSION%
           Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.zip -OutFile wxWidgets-${{env.WXVERSION}}.zip
     - name: extract_wxWidget
-      run: Expand-Archive -LiteralPath wxWidgets-${{env.WXVERSION}}.zip -DestinationPath .
+      run: Expand-Archive -LiteralPath wxWidgets-${{env.WXVERSION}}.zip -DestinationPath wxWidgets-${{env.WXVERSION}}
     - name: configure_wxWidgets
       run: |
           cd wxWidgets-${{env.WXVERSION}}
