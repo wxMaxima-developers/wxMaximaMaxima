@@ -1,0 +1,32 @@
+name: build
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+  WXVERSION: 3.1.3
+
+jobs:
+  compile_wxWidgets:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout_git
+      uses: actions/checkout@v2
+      with:
+        # We must fetch at least the immediate parents so that if this is
+        # a pull request then we can checkout the head.
+        fetch-depth: 15
+    - name: Download_wxWidgets
+        run: https://github.com/wxWidgets/wxWidgets/releases/download/v${WXWIDGETSVERSION}/wxWidgets-${WXWIDGETSVERSION}.tar.bz2
+    - name: extract_wxWidget
+        run: zip e wxWidgets-${WXWIDGETSVERSION}.tar.bz2
+    - name: configure_wxWidgets
+        run: |
+          cd wxWidgets-${WXWIDGETSVERSION}
+	  cd build
+	  cd msw
+	  mingw32-make -f makefile.gcc
+	  cd ..
+	  cd ..
+	  cd..
