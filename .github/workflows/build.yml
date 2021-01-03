@@ -17,7 +17,7 @@ jobs:
         cache-name: cache-wxWidgets
       with:
         path: wxWidgets-${{env.WXVERSION}}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-1
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
@@ -38,7 +38,7 @@ jobs:
           cd wxWidgets-${{env.WXVERSION}}
           cd build
           cd msw
-          if (!(Test-Path wxWidgets-${{env.WXVERSION}})) { mingw32-make -f makefile.gcc SHELL=cmd.exe -j 4}
+          if (!(Test-Path wxWidgets-${{env.WXVERSION}})) { mingw32-make -f makefile.gcc SHELL=cmd.exe}
           cd ..
           cd ..
           cd..
