@@ -30,15 +30,15 @@ jobs:
         fetch-depth: 15
     - name: Download_wxWidgets
       run: |
-          if (not Test-Path wxWidgets-${{env.WXVERSION}}) { Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.zip -OutFile wxWidgets-${{env.WXVERSION}}.zip }
+          if (!(Test-Path wxWidgets-${{env.WXVERSION}})) { Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.zip -OutFile wxWidgets-${{env.WXVERSION}}.zip }
     - name: extract_wxWidget
-      run: if (not Test-Path wxWidgets-${{env.WXVERSION}}) { Expand-Archive -LiteralPath wxWidgets-${{env.WXVERSION}}.zip -DestinationPath wxWidgets-${{env.WXVERSION}} }
+      run: if (!(Test-Path wxWidgets-${{env.WXVERSION}})) { Expand-Archive -LiteralPath wxWidgets-${{env.WXVERSION}}.zip -DestinationPath wxWidgets-${{env.WXVERSION}} }
     - name: configure_wxWidgets
       run: |
           cd wxWidgets-${{env.WXVERSION}}
           cd build
           cd msw
-          if (not Test-Path wxWidgets-${{env.WXVERSION}}) { mingw32-make -f makefile.gcc SHELL=cmd.exe -j 4}
+          if (!(Test-Path wxWidgets-${{env.WXVERSION}})) { mingw32-make -f makefile.gcc SHELL=cmd.exe -j 4}
           cd ..
           cd ..
           cd..
