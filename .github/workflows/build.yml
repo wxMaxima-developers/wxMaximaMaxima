@@ -33,7 +33,7 @@ jobs:
           cd wxWidgets-${{env.WXVERSION}}
           cd build
           cd msw
-          mingw32-make -f makefile.gcc
+          mingw32-make -f makefile.gcc SHELL=cmd.exe
           cd ..
           cd ..
           cd..
