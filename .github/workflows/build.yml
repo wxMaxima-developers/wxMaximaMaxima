@@ -11,6 +11,17 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Cache wxWidgets
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-wxWidgets
+      with:
+        path: wxWidgets-${{env.WXVERSION}}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
     - name: Checkout_git
       uses: actions/checkout@v2
       with:
@@ -19,21 +30,15 @@ jobs:
         fetch-depth: 15
     - name: Download_wxWidgets
       run: |
-          echo 1: ${WXVERSION}
-          echo 2: ${{env.WXVERSION}}
-          echo 3: ${env.WXVERSION}
-          echo 4: ${ env.WXVERSION }
-          echo 5: $WXVERSION
-          echo 6: %WXVERSION%
-          Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.zip -OutFile wxWidgets-${{env.WXVERSION}}.zip
+          if (not Test-Path wxWidgets-${{env.WXVERSION}}) { Invoke-WebRequest -Uri https://github.com/wxWidgets/wxWidgets/releases/download/v${{env.WXVERSION}}/wxWidgets-${{env.WXVERSION}}.zip -OutFile wxWidgets-${{env.WXVERSION}}.zip }
     - name: extract_wxWidget
-      run: Expand-Archive -LiteralPath wxWidgets-${{env.WXVERSION}}.zip -DestinationPath wxWidgets-${{env.WXVERSION}}
+      run: if (not Test-Path wxWidgets-${{env.WXVERSION}}) { Expand-Archive -LiteralPath wxWidgets-${{env.WXVERSION}}.zip -DestinationPath wxWidgets-${{env.WXVERSION}} }
     - name: configure_wxWidgets
       run: |
           cd wxWidgets-${{env.WXVERSION}}
           cd build
           cd msw
-          mingw32-make -f makefile.gcc SHELL=cmd.exe
+          if (not Test-Path wxWidgets-${{env.WXVERSION}}) { mingw32-make -f makefile.gcc SHELL=cmd.exe -j 4}
           cd ..
           cd ..
           cd..
